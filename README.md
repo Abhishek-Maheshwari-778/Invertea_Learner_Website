@@ -1,5 +1,7 @@
 # Invertea Learners - Online Learning Platform
 
+> **Live Demo:** [https://invertea-learner-website.vercel.app/](https://invertea-learner-website.vercel.app/)
+
 Welcome to **Invertea Learners**, a comprehensive online learning platform designed to provide quality education accessible to everyone, anywhere. This project showcases a modern, responsive, and user-friendly interface for students to browse courses, access notes, test their skills with quizzes, and connect with expert instructors.
 
 ![Invertea Learners Banner](images/home/student.png)
@@ -24,15 +26,6 @@ Welcome to **Invertea Learners**, a comprehensive online learning platform desig
 -   **Notes Section**: Easy access to downloadable PDF notes.
 -   **Testimonials**: Realistic student feedback sections with professional visuals.
 
-## 🚀 Technologies Used
-
--   **HTML5**: Semantic structure.
--   **CSS3**: Custom properties (variables), Flexbox, Grid, Animations.
--   **JavaScript (Vanilla)**: DOM manipulation, Event listeners, Local Storage logic, Quiz Game engine.
--   **JQuery**: Required for OwlCarousel.
--   **OwlCarousel**: For sliding carousels (Partners, Testimonials).
--   **FontAwesome**: For icons.
-
 ## 👥 Team Members
 
 This project was built with passion by the Invertea Learners team:
@@ -45,31 +38,14 @@ This project was built with passion by the Invertea Learners team:
 -   Rinku
 -   Chaht
 
-*(Special thanks to my AI assistant for helping polish the code and UI!)*
+## 🚀 Technologies Used
 
-## 🛠️ How to Deploy on Vercel
-
-This project is optimized for deployment on Vercel.
-
-1.  **Push to GitHub**:
-    -   Initialize git: `git init`
-    -   Add files: `git add .`
-    -   Commit changes: `git commit -m "Final version for presentation"`
-    -   Push to your repo: `git push origin main`
-
-2.  **Login to Vercel**: 
-    -   Go to [vercel.com](https://vercel.com) and login with your GitHub account.
-
-3.  **Add New Project**: 
-    -   Click "Add New..." -> "Project".
-
-4.  **Import Repository**: 
-    -   Select `Invertea_Learner_Website`.
-
-5.  **Deploy**: 
-    -   Vercel will automatically detect the `index.html` and deploy your site.
-
-6.  **Done!** Your website is now live and can be shared with teachers and friends.
+-   **HTML5**: Semantic structure.
+-   **CSS3**: Custom properties (variables), Flexbox, Grid, Animations.
+-   **JavaScript (Vanilla)**: DOM manipulation, Event listeners, Local Storage logic, Quiz Game engine.
+-   **JQuery**: Required for OwlCarousel.
+-   **OwlCarousel**: For sliding carousels (Partners, Testimonials).
+-   **FontAwesome**: For icons.
 
 ## 📂 Project Structure
 
