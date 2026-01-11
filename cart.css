@@ -1,0 +1,135 @@
+/* Inherit variables from style.css (must be included in html) */
+
+body {
+    background-color: var(--primary-light-clr);
+    min-height: 100vh;
+}
+
+.cart-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    background: var(--bg-clr-1);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cart-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    color: var(--dark-heading-clr);
+    text-align: center;
+    position: relative;
+}
+
+.cart-items {
+    margin-bottom: 30px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: box-shadow 0.3s;
+}
+
+.cart-item:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.cart-item img {
+    width: 100px;
+    height: 70px; /* Adjusted aspect ratio */
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.item-details {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.item-details h2 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: var(--dark-heading-clr);
+}
+
+.item-details p {
+    font-size: 1rem;
+    color: var(--dark-text-clr);
+}
+
+.remove-btn {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    color: #fff;
+    background-color: #ff4d4d; /* Custom red for delete */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.remove-btn:hover {
+    background-color: #cc0000;
+}
+
+.cart-summary {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+}
+
+.cart-summary h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--dark-heading-clr);
+}
+
+.cart-summary p {
+    font-size: 1.2rem;
+    margin: 8px 0;
+    color: var(--dark-text-clr);
+}
+
+.cart-summary p span {
+    font-weight: bold;
+    color: var(--primary-clr);
+}
+
+.checkout-btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+    color: var(--light-heading-clr);
+    background-color: var(--primary-clr);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+.checkout-btn:hover {
+    background-color: var(--dark-heading-clr);
+    border: 1px solid var(--primary-clr);
+    color: var(--primary-clr);
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: var(--primary-clr);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}

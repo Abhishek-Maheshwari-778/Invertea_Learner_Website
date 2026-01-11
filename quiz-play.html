@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playing Quiz - Invertea Learners</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <style>
+        .play-container {
+            padding: 50px 8%;
+            background-color: var(--primary-light-clr);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .quiz-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+        .question {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--dark-heading-clr);
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option-btn {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            background: transparent;
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--dark-text-clr);
+            transition: all 0.3s;
+        }
+        .option-btn:hover {
+            border-color: var(--primary-clr);
+            color: var(--primary-clr);
+            background: var(--primary-light-clr);
+        }
+        .score-board {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .score-board h2 {
+            color: var(--primary-clr);
+        }
+        .restart-btn {
+            margin-top: 20px;
+            background: var(--primary-clr);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="play-container">
+        <h1 id="quiz-title">Quiz Time</h1>
+        
+        <div class="quiz-box" id="quiz-box">
+            <p class="question" id="question">Loading Question...</p>
+            <div class="options" id="options">
+                <!-- Options will be generated here -->
+            </div>
+            <p id="progress" style="margin-top: 15px; color: #888;">Question 1 of 5</p>
+        </div>
+
+        <div class="score-board" id="score-board">
+            <h2>Quiz Completed!</h2>
+            <p>Your Score: <span id="score">0</span> / <span id="total">5</span></p>
+            <a href="quiz.html" class="restart-btn">Play Another Quiz</a>
+        </div>
+    </div>
+
+    <script>
+        const questionsData = {
+            html: [
+                { q: "What does HTML stand for?", options: ["Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlinks and Text Markup Language"], a: 0 },
+                { q: "Who is making the Web standards?", options: ["Google", "The World Wide Web Consortium", "Microsoft"], a: 1 },
+                { q: "Choose the correct HTML element for the largest heading:", options: ["<heading>", "<h6>", "<h1>"], a: 2 },
+                { q: "Which character is used to indicate an end tag?", options: ["/", "<", "*"], a: 0 },
+                { q: "How can you open a link in a new tab/browser window?", options: ["<a href='url' target='new'>", "<a href='url' target='_blank'>", "<a href='url' new>"], a: 1 }
+            ],
+            css: [
+                { q: "What does CSS stand for?", options: ["Creative Style Sheets", "Cascading Style Sheets", "Computer Style Sheets"], a: 1 },
+                { q: "Which HTML attribute is used to define inline styles?", options: ["class", "style", "font"], a: 1 },
+                { q: "Which is the correct CSS syntax?", options: ["body:color=black;", "body {color: black;}", "{body;color:black;}"], a: 1 },
+                { q: "How do you insert a comment in a CSS file?", options: ["// this is a comment", "/* this is a comment */", "' this is a comment"], a: 1 },
+                { q: "Which property is used to change the background color?", options: ["background-color", "color", "bgcolor"], a: 0 }
+            ],
+            js: [
+                { q: "Inside which HTML element do we put the JavaScript?", options: ["<javascript>", "<scripting>", "<script>"], a: 2 },
+                { q: "How do you write 'Hello World' in an alert box?", options: ["msg('Hello World');", "alertBox('Hello World');", "alert('Hello World');"], a: 2 },
+                { q: "How do you create a function in JavaScript?", options: ["function myFunction()", "function:myFunction()", "create myFunction()"], a: 0 },
+                { q: "How to write an IF statement in JavaScript?", options: ["if i = 5 then", "if (i == 5)", "if i == 5 then"], a: 1 },
+                { q: "How does a WHILE loop start?", options: ["while (i <= 10)", "while i = 1 to 10", "while (i <= 10; i++)"], a: 0 }
+            ],
+            python: [
+                { q: "What is a correct syntax to output 'Hello World' in Python?", options: ["p('Hello World')", "print('Hello World')", "echo 'Hello World'"], a: 1 },
+                 { q: "How do you insert COMMENTS in Python code?", options: ["/* This is a comment */", "# This is a comment", "// This is a comment"], a: 1 },
+                 { q: "Which one is NOT a legal variable name?", options: ["_myvar", "Myvar", "my-var"], a: 2 },
+                 { q: "How do you create a variable with the numeric value 5?", options: ["x = 5", "x = int(5)", "Both the other answers are correct"], a: 2 },
+                 { q: "What is the correct file extension for Python files?", options: [".pyth", ".pt", ".py"], a: 2 }
+            ]
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const topic = urlParams.get('topic') || 'html';
+        const questions = questionsData[topic] || questionsData['html'];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        const questionEl = document.getElementById('question');
+        const optionsEl = document.getElementById('options');
+        const progressEl = document.getElementById('progress');
+        const quizBox = document.getElementById('quiz-box');
+        const scoreBoard = document.getElementById('score-board');
+        const quizTitle = document.getElementById('quiz-title');
+
+        quizTitle.textContent = topic.toUpperCase() + " Quiz";
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            questionEl.textContent = q.q;
+            optionsEl.innerHTML = '';
+            
+            q.options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = opt;
+                btn.onclick = () => checkAnswer(index);
+                optionsEl.appendChild(btn);
+            });
+
+            progressEl.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+        }
+
+        function checkAnswer(selectedIndex) {
+            const correctIndex = questions[currentQuestion].a;
+            
+            if (selectedIndex === correctIndex) {
+                score++;
+                // alert("Correct!");
+            } else {
+                // alert("Wrong!");
+            }
+
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            quizBox.style.display = 'none';
+            scoreBoard.style.display = 'block';
+            document.getElementById('score').textContent = score;
+            document.getElementById('total').textContent = questions.length;
+        }
+
+        // Init
+        loadQuestion();
+
+    </script>
+
+</body>
+</html>

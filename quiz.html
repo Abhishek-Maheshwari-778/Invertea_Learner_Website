@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzes - Invertea Learners</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <style>
+        .quiz-container {
+            padding: 50px 8%;
+            background-color: var(--primary-light-clr);
+            min-height: 100vh;
+        }
+        .quiz-container h1 {
+            color: var(--dark-heading-clr);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .quiz-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .quiz-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .quiz-card:hover {
+            transform: translateY(-5px);
+        }
+        .quiz-card i {
+            font-size: 40px;
+            color: var(--primary-clr);
+            margin-bottom: 15px;
+        }
+        .quiz-card h3 {
+            margin-bottom: 10px;
+            color: var(--dark-heading-clr);
+        }
+        .quiz-card p {
+            color: var(--dark-text-clr);
+            margin-bottom: 20px;
+        }
+        .start-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-clr);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .back-link {
+            display: block;
+            margin-bottom: 20px;
+            color: var(--primary-clr);
+            font-size: 18px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        <h1>Test Your Skills</h1>
+        <p style="text-align: center; margin-bottom: 40px; color: var(--dark-text-clr);">Choose a topic to start your quiz.</p>
+
+        <div class="quiz-grid">
+            <div class="quiz-card">
+                <i class="fa-brands fa-html5"></i>
+                <h3>HTML Basics</h3>
+                <p>Test your knowledge of HTML structure and tags.</p>
+                <a href="quiz-play.html?topic=html" class="start-btn">Start Quiz</a>
+            </div>
+
+            <div class="quiz-card">
+                <i class="fa-brands fa-css3-alt"></i>
+                <h3>CSS Styling</h3>
+                <p>Challenge yourself with CSS selectors and properties.</p>
+                <a href="quiz-play.html?topic=css" class="start-btn">Start Quiz</a>
+            </div>
+
+            <div class="quiz-card">
+                <i class="fa-brands fa-js"></i>
+                <h3>JavaScript Logic</h3>
+                <p>See how well you know JavaScript fundamentals.</p>
+                <a href="quiz-play.html?topic=js" class="start-btn">Start Quiz</a>
+            </div>
+             <div class="quiz-card">
+                <i class="fa-brands fa-python"></i>
+                <h3>Python Programming</h3>
+                <p>Check your python coding skills.</p>
+                <a href="quiz-play.html?topic=python" class="start-btn">Start Quiz</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

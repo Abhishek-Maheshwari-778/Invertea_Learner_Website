@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Invertea Learners</title>
+    <!-- Link To Custom CSS Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cart.css">
+    <!-- Link To Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+</head>
+<body>
+    
+    <div class="cart-container">
+        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        <h1>Your Cart</h1>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart Items Rendered Here via JS -->
+            <p style="text-align: center; color: #666;">Your cart is empty.</p>
+        </div>
+
+        <div class="cart-summary">
+            <h2>Cart Summary</h2>
+            <p>Total Items: <span id="total-items">0</span></p>
+            <p>Total Price: ₹<span id="total-price">0.00</span></p>
+            <button class="checkout-btn" onclick="alert('Checkout functionality coming soon!')">Proceed to Checkout</button>
+            <br>
+            <button class="remove-btn" onclick="clearCart()" style="background-color: #777; margin-top: 10px;">Clear Cart</button>
+        </div>
+    </div>
+
+    <script>
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem('invertea_cart')) || [];
+            const container = document.getElementById('cart-items');
+            const totalItemsEl = document.getElementById('total-items');
+            const totalPriceEl = document.getElementById('total-price');
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666;">Your cart is empty.</p>';
+                totalItemsEl.textContent = 0;
+                totalPriceEl.textContent = '0.00';
+                return;
+            }
+
+            container.innerHTML = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += parseFloat(item.price);
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+                itemDiv.innerHTML = `
+                    <div style="display:flex; align-items:center;">
+                        <img src="${item.image}" alt="${item.name}" style="width: 80px; height: 60px; object-fit: cover; margin-right: 15px; border-radius: 5px;">
+                        <div class="item-details">
+                            <h2>${item.name}</h2>
+                            <p>Price: <b>₹${item.price}</b></p>
+                        </div>
+                    </div>
+                    <button class="remove-btn" onclick="removeItem(${index})"><i class="fa-solid fa-trash"></i></button>
+                `;
+                container.appendChild(itemDiv);
+            });
+
+            totalItemsEl.textContent = cart.length;
+            totalPriceEl.textContent = total.toFixed(2);
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('invertea_cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('invertea_cart', JSON.stringify(cart));
+            renderCart();
+        }
+
+        function clearCart() {
+            localStorage.removeItem('invertea_cart');
+            renderCart();
+        }
+
+        renderCart();
+    </script>
+
+</body>
+</html>

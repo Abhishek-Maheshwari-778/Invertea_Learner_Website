@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes Viewer</title>
+    <link rel="stylesheet" href="note.css">
+</head>
+<body>
+    <div class="notes-display-container">
+        <h1>Notes Viewer</h1>
+        <p id="note-title">Loading...</p>
+        <div class="notes-content">
+            <iframe id="notes-frame" src="" frameborder="0" width="100%" height="600px"></iframe>
+        </div>
+        <a href="../index.html#Notes" class="back-btn">Back to Notes</a>
+    </div>
+
+    <!-- Notes Section -->
+    <section class="Notes" id="Notes">
+        <div class="Notes-container">
+            <h2 class="section-title">Explore Notes</h2>
+            <p class="section-description">Access detailed notes for each topic to enhance your learning experience. Click on a topic to view its notes.</p>
+            <div class="notes-grid">
+                <a href="notes/html.pdf" class="note-item" target="_blank">
+                    <i class="fa-solid fa-code"></i>
+                    <span>HTML</span>
+                </a>
+                <a href="notes/css.pdf" class="note-item" target="_blank">
+                    <i class="fa-solid fa-palette"></i>
+                    <span>CSS</span>
+                </a>
+                <a href="notes/js.pdf" class="note-item" target="_blank">
+                    <i class="fa-brands fa-js"></i>
+                    <span>JavaScript</span>
+                </a>
+                <a href="notes/csharp.pdf" class="note-item" target="_blank">
+                    <i class="fa-solid fa-laptop-code"></i>
+                    <span>C#</span>
+                </a>
+                <a href="notes/java.pdf" class="note-item" target="_blank">
+                    <i class="fa-brands fa-java"></i>
+                    <span>Java</span>
+                </a>
+                <a href="notes/python.pdf" class="note-item" target="_blank">
+                    <i class="fa-brands fa-python"></i>
+                    <span>Python</span>
+                </a>
+                <a href="notes/react.pdf" class="note-item" target="_blank">
+                    <i class="fa-brands fa-react"></i>
+                    <span>React</span>
+                </a>
+                <a href="notes/Figma.pdf" class="note-item" target="_blank">
+                    <i class="fa-solid fa-pencil-ruler"></i>
+                    <span>Figma</span>
+                </a>
+                <a href="notes/node js.pdf" class="note-item" target="_blank">
+                    <i class="fa-brands fa-node"></i>
+                    <span>Node.js</span>
+                </a>
+                <a href="notes/python dataanalysics.pdf" class="note-item" target="_blank">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Data Analytics</span>
+                </a>
+                <a href="notes/python dataanalysics.pdf" class="note-item" target="_blank">
+                    <i class="fa-solid fa-robot"></i>
+                    <span>Machine Learning</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Get the query parameter from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const note = urlParams.get('note');
+
+        // Map note names to their corresponding PDF files and titles
+        const notesMap = {
+            html: { file: "html.pdf", title: "HTML Notes" },
+            css: { file: "css.pdf", title: "CSS Notes" },
+            javascript: { file: "js.pdf", title: "JavaScript Notes" },
+            csharp: { file: "csharp.pdf", title: "C# Notes" },
+            java: { file: "java.pdf", title: "Java Notes" },
+            python: { file: "python.pdf", title: "Python Notes" },
+            react: { file: "react.pdf", title: "React Notes" },
+            figma: { file: "Figma.pdf", title: "Figma Notes" },
+            node: { file: "node js.pdf", title: "Node.js Notes" },
+            dataanalytics: { file: "python dataanalysics.pdf", title: "Data Analytics Notes" },
+            machinelearning: { file: "python dataanalysics.pdf", title: "Machine Learning Notes" }
+        };
+
+        // Set the iframe source and title based on the selected note
+        const notesFrame = document.getElementById('notes-frame');
+        const noteTitle = document.getElementById('note-title');
+        if (note && notesMap[note]) {
+            notesFrame.src = notesMap[note].file;
+            noteTitle.textContent = notesMap[note].title;
+        } else {
+            notesFrame.src = "";
+            noteTitle.textContent = "Note not found!";
+        }
+    </script>
+</body>
+</html>
